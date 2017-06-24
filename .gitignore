@@ -1,3 +1,4 @@
 .idea/
 key.yaml
 .cache
+__pycache__/

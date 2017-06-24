@@ -1,6 +1,8 @@
 import logging
 
+import matplotlib.pyplot as plt
 import oandapy
+import pandas as pd
 
 from config_loader.loader import ConfigLoader
 
@@ -11,6 +13,10 @@ if __name__ == '__main__':
     logging.info(f'Obtaining credentials for {environment} environment')
 
     oanda = oandapy.API(environment=environment, access_token=access_token)
-    response = oanda.get_history()
-    logging.basicConfig(level=logging.DEBUG)
-    logging.debug(response)
+    response = oanda.get_history(instrument='EUR_USD')
+
+    df = pd.DataFrame(response['candles'])
+
+    df['closeBid'].plot()
+
+    plt.show()

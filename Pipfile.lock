@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b9de15db2ce919780b5a11b4b734df3ac4742b7d1d7f270aa54e81d0a27ed718"
+            "sha256": "3eb7beb66161debd086e60f14fb6367d69f07775ec21cd977b7318fe500a2790"
         },
         "requires": {},
         "sources": [
@@ -12,11 +12,35 @@
         ]
     },
     "default": {
+        "cycler": {
+            "version": "==0.10.0"
+        },
+        "matplotlib": {
+            "version": "==2.0.2"
+        },
+        "numpy": {
+            "version": "==1.13.0"
+        },
         "oandapy": {
             "git": "https://github.com/oanda/oandapy.git"
         },
+        "pandas": {
+            "version": "==0.20.2"
+        },
+        "pyparsing": {
+            "version": "==2.2.0"
+        },
+        "python-dateutil": {
+            "version": "==2.6.0"
+        },
+        "pytz": {
+            "version": "==2017.2"
+        },
         "pyyaml": {
             "version": "==3.12"
+        },
+        "six": {
+            "version": "==1.10.0"
         }
     },
     "develop": {
