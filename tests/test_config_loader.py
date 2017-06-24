@@ -1,4 +1,5 @@
 import os
+import tempfile
 
 import pytest
 import yaml
@@ -8,6 +9,9 @@ from ..config_loader.loader import ConfigLoader
 
 @pytest.fixture(scope='function', autouse=False)
 def generate_yaml(request):
+    tempdir = tempfile.gettempdir()
+    os.chdir(tempdir)
+
     with open('key.yaml', 'w') as f:
         key = {
             'environment': 'practice',
@@ -24,6 +28,9 @@ def generate_yaml(request):
 
 @pytest.fixture(scope='function', autouse=False)
 def generate_wrong_yaml(request):
+    tempdir = tempfile.gettempdir()
+    os.chdir(tempdir)
+
     with open('key.yaml', 'w') as f:
         key = {
             'wrong': 'wrong',
