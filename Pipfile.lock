@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "3b5fe1689703b5c3eb89855d010d958629f70354c8b5ab2f0f208ae8d9be1720"
+            "sha256": "2cc1d17d86a3014ee1b16b1af33d6a89ca217ffb21a8fe860720e928082c439a"
         },
         "requires": {},
         "sources": [
@@ -14,6 +14,9 @@
     "default": {
         "oandapy": {
             "git": "https://github.com/oanda/oandapy.git"
+        },
+        "pyyaml": {
+            "version": "==3.12"
         }
     },
     "develop": {
