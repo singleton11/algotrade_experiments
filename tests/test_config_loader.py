@@ -22,8 +22,30 @@ def generate_yaml(request):
         request.addfinalizer(fin)
 
 
+@pytest.fixture(scope='function', autouse=False)
+def generate_wrong_yaml(request):
+    with open('key.yaml', 'w') as f:
+        key = {
+            'wrong': 'wrong',
+        }
+
+        f.write(yaml.dump(key))
+
+        def fin():
+            os.remove('key.yaml')
+
+        request.addfinalizer(fin)
+
+
 @pytest.mark.usefixtures('generate_yaml')
 def test_file_exists_and_correct_structure():
     environment, access_token = ConfigLoader.load()
     assert environment == 'practice'
     assert access_token == 'access_token'
+
+
+@pytest.mark.usefixtures('generate_wrong_yaml')
+def test_wrong_structure():
+    environment, access_token = ConfigLoader.load()
+    assert environment is None
+    assert access_token is None
