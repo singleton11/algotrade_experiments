@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "2cc1d17d86a3014ee1b16b1af33d6a89ca217ffb21a8fe860720e928082c439a"
+            "sha256": "04f20ee59fba96c449b2d3d4051ec2e0e2e68b202226a98032aadfd98abce8b4"
         },
         "requires": {},
         "sources": [
@@ -44,8 +44,14 @@
         "ptyprocess": {
             "version": "==0.5.2"
         },
+        "py": {
+            "version": "==1.4.34"
+        },
         "pygments": {
             "version": "==2.2.0"
+        },
+        "pytest": {
+            "version": "==3.1.2"
         },
         "setuptools": {
             "version": "==36.0.1"

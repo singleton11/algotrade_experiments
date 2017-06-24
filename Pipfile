@@ -2,11 +2,12 @@
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 
-[packages]
-pyyaml = "*"
-
 [dev-packages]
 ipython = "*"
+pytest = "*"
+
+[packages]
+pyyaml = "*"
 
 [packages.oandapy]
 git = "https://github.com/oanda/oandapy.git"
