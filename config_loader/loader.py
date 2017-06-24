@@ -12,6 +12,14 @@ class ConfigLoader(object):
         environment: 'practice'
         access_token: 'this is token'
 
+    Examples:
+
+    >>> ConfigLoader.load()
+    'practice', 'token'
+
+    >>> ConfigLoader.load('key.yaml')
+    'practice', 'token'
+
     """
 
     class Constants(object):
