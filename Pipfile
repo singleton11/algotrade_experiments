@@ -1,0 +1,6 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+
+[packages.oandapy]
+git = "https://github.com/oanda/oandapy.git"
