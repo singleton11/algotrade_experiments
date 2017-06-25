@@ -7,7 +7,7 @@ import yaml
 from ..config_loader.loader import ConfigLoader
 
 
-@pytest.fixture(scope='function', autouse=False)
+@pytest.fixture
 def generate_yaml(request):
     tempdir = tempfile.gettempdir()
     os.chdir(tempdir)
@@ -27,7 +27,7 @@ def generate_yaml(request):
         request.addfinalizer(fin)
 
 
-@pytest.fixture(scope='function', autouse=False)
+@pytest.fixture
 def generate_wrong_yaml(request):
     tempdir = tempfile.gettempdir()
     os.chdir(tempdir)
@@ -45,16 +45,14 @@ def generate_wrong_yaml(request):
         request.addfinalizer(fin)
 
 
-@pytest.mark.usefixtures('generate_yaml')
-def test_file_exists_and_correct_structure():
+def test_file_exists_and_correct_structure(generate_yaml):
     environment, access_token, account_id = ConfigLoader.load()
     assert environment == 'practice'
     assert access_token == 'access_token'
     assert account_id == 'account_id'
 
 
-@pytest.mark.usefixtures('generate_wrong_yaml')
-def test_wrong_structure():
+def test_wrong_structure(generate_wrong_yaml):
     environment, access_token, account_id = ConfigLoader.load()
     assert environment is None
     assert access_token is None
