@@ -25,11 +25,13 @@ class ConfigLoader(object):
     class Constants(object):
         ENVIRONMENT: str = 'environment'
         ACCESS_TOKEN: str = 'access_token'
+        ACCOUNT_ID: str = 'account_id'
 
     @staticmethod
-    def load(file_name: str = 'key.yaml') -> Tuple[str, str]:
+    def load(file_name: str = 'key.yaml') -> Tuple[str, str, str]:
         """Returns ``environment`` and ``access_token``."""
         with open(file_name) as f:
             settings: Dict[str, str] = yaml.load(f)
             return (settings.get(ConfigLoader.Constants.ENVIRONMENT),
-                    settings.get(ConfigLoader.Constants.ACCESS_TOKEN))
+                    settings.get(ConfigLoader.Constants.ACCESS_TOKEN),
+                    settings.get(ConfigLoader.Constants.ACCOUNT_ID))
