@@ -7,7 +7,7 @@ import pandas as pd
 from config_loader.loader import ConfigLoader
 
 if __name__ == '__main__':
-    environment, access_token = ConfigLoader.load()
+    environment, access_token, account_id = ConfigLoader.load()
 
     logging.basicConfig(level=logging.DEBUG)
     logging.info(f'Obtaining credentials for {environment} environment')
