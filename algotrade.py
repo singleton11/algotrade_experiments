@@ -19,4 +19,8 @@ if __name__ == '__main__':
 
     df['closeBid'].plot()
 
+    df_mean = df.ewm(com=10).mean()
+
+    df_mean['closeBid'].plot()
+
     plt.show()
