@@ -61,8 +61,8 @@ class EMADecisionMaker(DecisionMaker):
             order: Order = Order(**orders[0])
 
             if (order.side == DecisionMaker.Constants.BUY and new_diff <= 0 or
-                            order.side == DecisionMaker.Constants.SELL and
-                            new_diff >= 0):
+                    order.side == DecisionMaker.Constants.SELL and
+                    new_diff >= 0):
                 return DecisionMaker.Constants.CLOSE
             else:
                 return DecisionMaker.Constants.DO_NOTHING
