@@ -22,7 +22,7 @@ if __name__ == '__main__':
     df['closeBid'].plot()
     df_mean['closeBid'].plot()
 
-    decision_maker = EMADecisionMaker(10)
-    print(decision_maker.decide(df, oanda, account_id))
+    decision_maker = EMADecisionMaker(oanda, account_id, 10)
+    print(decision_maker.decide(df))
 
     plt.show()
