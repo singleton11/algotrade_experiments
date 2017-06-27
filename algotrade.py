@@ -6,6 +6,7 @@ import pandas as pd
 
 from config_loader.loader import ConfigLoader
 from strategies.ema.decision_maker import EMADecisionMaker
+from utils.available_units_calculator import AvailableUnitsCalculator
 
 if __name__ == '__main__':
     environment, access_token, account_id = ConfigLoader.load()
@@ -24,5 +25,10 @@ if __name__ == '__main__':
 
     decision_maker = EMADecisionMaker(oanda, account_id, 10)
     print(decision_maker.decide(df))
+
+    print(oanda.get_prices(instruments='EUR_USD'))
+    print(oanda.get_account(account_id))
+
+    print(AvailableUnitsCalculator(account_id, oanda).get_available_units())
 
     plt.show()
