@@ -6,7 +6,7 @@ from oandapy import API
 from ..decision_maker import DecisionMaker
 
 
-class Order(NamedTuple):
+class Trade(NamedTuple):
     """Interface of order"""
     side: str
 
@@ -51,14 +51,14 @@ class EMADecisionMaker(DecisionMaker):
             i -= 1
             new_diff = df[i] - df_mean[i]
 
-        orders: List[Dict] = api.get_orders(account_id=account_id)['orders']
+        orders: List[Dict] = api.get_trades(account_id=account_id)['trades']
 
         if not len(orders):
             return (DecisionMaker.Constants.SELL
                     if new_diff > 0 else DecisionMaker.Constants.BUY)
         else:
             # Obtains the first order, another should be ignored, if exists
-            order: Order = Order(**orders[0])
+            order: Trade = Trade(**orders[0])
 
             if (order.side == DecisionMaker.Constants.BUY and new_diff <= 0 or
                     order.side == DecisionMaker.Constants.SELL and
