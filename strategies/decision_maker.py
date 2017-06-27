@@ -1,5 +1,4 @@
 import pandas as pd
-from oandapy import API
 
 
 class DecisionMaker(object):
