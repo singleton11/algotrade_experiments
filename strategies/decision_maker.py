@@ -11,7 +11,7 @@ class DecisionMaker(object):
         BUY: str = 'buy'
         CLOSE: str = 'close'
 
-    def decide(self, df: pd.DataFrame, api: API, account_id: str) -> str:
+    def decide(self, df: pd.DataFrame, account_id: str) -> str:
         """Make a decision
 
         Args:
