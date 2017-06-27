@@ -11,14 +11,11 @@ class DecisionMaker(object):
         BUY: str = 'buy'
         CLOSE: str = 'close'
 
-    def decide(self, df: pd.DataFrame, account_id: str) -> str:
+    def decide(self, df: pd.DataFrame) -> str:
         """Make a decision
 
         Args:
-            account_id: account id against which operation should be executed
             df: Historical data of trades
-            api: API instance, was injected to be able to replace API by
-                simulation to make backtesting
 
         Returns:
             What decider should do on market

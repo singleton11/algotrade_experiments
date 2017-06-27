@@ -23,19 +23,23 @@ class EMADecisionMaker(DecisionMaker):
 
     """
 
-    def __init__(self, api: API, window: int = 10) -> None:
+    def __init__(self, api: API, account_id: str, window: int = 10) -> None:
         """Initialize with ``window`` arg
 
         Args:
+            api: API Client
+            account_id: Oanda account ID
             window: EMA window
+
         """
 
         self.window = window
+        self.account_id = account_id
         self.api = api
 
         super().__init__()
 
-    def decide(self, df: pd.DataFrame, account_id: str) -> str:
+    def decide(self, df: pd.DataFrame) -> str:
         if 'closeBid' not in df:
             raise ValueError("There are no 'closeBid' field in data frame")
 
@@ -53,7 +57,7 @@ class EMADecisionMaker(DecisionMaker):
             new_diff = df[i] - df_mean[i]
 
         orders: List[Dict] = self.api.get_trades(
-            account_id=account_id)['trades']
+            account_id=self.account_id)['trades']
 
         if not len(orders):
             return (DecisionMaker.Constants.SELL
