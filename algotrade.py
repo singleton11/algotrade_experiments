@@ -1,5 +1,6 @@
 import logging
 
+import matplotlib.pyplot as plt
 import oandapy
 import pandas as pd
 
@@ -18,12 +19,22 @@ if __name__ == '__main__':
 
     counter = 0
 
+    plt.ion()
+
+    fig = plt.figure()
+
+    ax = fig.add_subplot(111)
+
     while True:
         response = oanda.get_history(instrument='EUR_USD')
 
         df = pd.DataFrame(response['candles'])
         df_mean = df.ewm(com=10).mean()
-
+        ax.clear()
+        df['closeBid'].plot(ax=ax)
+        df_mean['closeBid'].plot(ax=ax)
+        plt.draw()
+        plt.pause(0.5)
         decision_maker = EMADecisionMaker(oanda, account_id, 10)
         decision: str = decision_maker.decide(df)
         print(decision)
