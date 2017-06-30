@@ -8,7 +8,16 @@ from ..decision_maker import DecisionMaker
 
 class Trade(NamedTuple):
     """Interface of order"""
+    id: int
     side: str
+    units: int
+    instrument: str
+    time: str
+    price: float
+    takeProfit: float
+    stopLoss: float
+    trailingStop: float
+    trailingAmount: float
 
 
 class EMADecisionMaker(DecisionMaker):
@@ -56,18 +65,21 @@ class EMADecisionMaker(DecisionMaker):
             i -= 1
             new_diff = df[i] - df_mean[i]
 
-        orders: List[Dict] = self.api.get_trades(
+        trades: List[Dict] = self.api.get_trades(
             account_id=self.account_id)['trades']
 
-        if not len(orders):
+        print('Diff', new_diff)
+
+        if not len(trades):
             return (DecisionMaker.Constants.SELL
                     if new_diff > 0 else DecisionMaker.Constants.BUY)
         else:
             # Obtains the first order, another should be ignored, if exists
-            order: Trade = Trade(**orders[0])
+            trade: Trade = Trade(**trades[0])
 
-            if (order.side == DecisionMaker.Constants.BUY and new_diff <= 0 or
-                    order.side == DecisionMaker.Constants.SELL and
+            if (trade.side == DecisionMaker.Constants.SELL and
+                new_diff <= 0 or
+                trade.side == DecisionMaker.Constants.BUY and
                     new_diff >= 0):
                 return DecisionMaker.Constants.CLOSE
             else:
