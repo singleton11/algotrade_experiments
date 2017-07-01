@@ -54,16 +54,18 @@ class EMADecisionMaker(DecisionMaker):
 
         df = df['closeBid']  # Working only with close price
         df_mean: pd.DataFrame = df.ewm(com=self.window).mean()
+        df_mean_with_doubled_window: pd.DataFrame = df.ewm(
+            com=self.window * 2).mean()
 
         i: int = len(df) - 1
-        diff = df[i] - df_mean[i]
+        diff = df_mean[i] - df_mean_with_doubled_window[i]
         new_diff = diff
 
         # Checking diff and new_diff both has the same sign
         while i >= 0 and diff * new_diff >= 0:
             diff = new_diff
             i -= 1
-            new_diff = df[i] - df_mean[i]
+            new_diff = df_mean[i] - df_mean_with_doubled_window[i]
 
         trades: List[Dict] = self.api.get_trades(
             account_id=self.account_id)['trades']
@@ -78,8 +80,8 @@ class EMADecisionMaker(DecisionMaker):
             trade: Trade = Trade(**trades[0])
 
             if (trade.side == DecisionMaker.Constants.SELL and
-                new_diff <= 0 or
-                trade.side == DecisionMaker.Constants.BUY and
+                    new_diff <= 0 or
+                    trade.side == DecisionMaker.Constants.BUY and
                     new_diff >= 0):
                 return DecisionMaker.Constants.CLOSE
             else:

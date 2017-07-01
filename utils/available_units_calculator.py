@@ -8,6 +8,7 @@ class Price(NamedTuple):
     bid: float
     time: str
     ask: float
+    status: str
 
 
 class Account(NamedTuple):

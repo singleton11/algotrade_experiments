@@ -30,9 +30,11 @@ if __name__ == '__main__':
 
         df = pd.DataFrame(response['candles'])
         df_mean = df.ewm(com=10).mean()
+        df_another_mean = df.ewm(com=20).mean()
         ax.clear()
         df['closeBid'].plot(ax=ax)
         df_mean['closeBid'].plot(ax=ax)
+        df_another_mean['closeBid'].plot(ax=ax)
         plt.draw()
         plt.pause(0.5)
         decision_maker = EMADecisionMaker(oanda, account_id, 10)
